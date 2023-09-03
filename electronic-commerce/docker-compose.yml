@@ -1,0 +1,7 @@
+version: '3'
+services:
+  local:
+      image: "capitole_technical_test_pricing_api:latest"
+      ports:
+      - "9090:8080"
+      container_name: capitole_technical_test_pricing_api
