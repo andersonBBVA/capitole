@@ -9,20 +9,15 @@ import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERAT
 import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC;
 import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRICES_GET;
 
-import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpServerErrorException.InternalServerError;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.capitole.electroniccommerce.dto.PriceResponseDTO;
 import com.capitole.electroniccommerce.exception.BadRequestException;

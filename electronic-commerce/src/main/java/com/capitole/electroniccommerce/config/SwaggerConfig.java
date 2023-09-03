@@ -17,7 +17,7 @@ import io.swagger.v3.oas.models.info.License;
 public class SwaggerConfig {
 	
 	 @Bean
-	  public OpenAPI springShopOpenAPI() {
+	  OpenAPI springShopOpenAPI() {
 	      return new OpenAPI()
 	              .info(new Info().title("API test capitole")
 	              .description("Brands Price Capitol Test API")
