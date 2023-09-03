@@ -5,7 +5,20 @@ import java.util.List;
 
 import com.capitole.electroniccommerce.entity.PriceEntity;
 
+/**
+ * Service of prices
+ * @author Anderson Casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 public interface PriceService {
 
-	List<PriceEntity> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date);
+	/**
+	 * 
+	 * @param productId; Product identifier
+	 * @param brandId; Brand identifier
+	 * @param date;Date for which you want to search the price return prices filtered by date
+	 * @return
+	 */
+	public List<PriceEntity> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date);
 }

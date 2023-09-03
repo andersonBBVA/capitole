@@ -9,6 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import com.capitole.electroniccommerce.entity.PriceEntity;
 
+/**
+ * persistence repository for product prices
+ * @author Anderson casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 public interface PriceDAO extends JpaRepository<PriceEntity, Integer> {
 
 	 @Query("SELECT p FROM PriceEntity p WHERE p.productId = :productId AND  p.brandEntity.brandId = :brandId AND p.startDate <= :date AND p.endDate >= :date ORDER BY p.priority DESC LIMIT 1")	

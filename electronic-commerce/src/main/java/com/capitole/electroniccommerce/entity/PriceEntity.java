@@ -19,6 +19,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ *  Entity represent table PRICES
+ * @author Anderson casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 @Entity
 @Table(name = "\"PRICES\"")
 @Data

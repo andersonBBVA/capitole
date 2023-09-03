@@ -12,6 +12,12 @@ import com.capitole.electroniccommerce.service.PriceService;
 
 import lombok.extern.slf4j.Slf4j;
 
+/** 
+ * Service that defines the business logic for pricing 
+ * @author 01061
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 @Slf4j
 @Service
 public class PriceServiceImpl implements PriceService {

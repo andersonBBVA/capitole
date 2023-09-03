@@ -30,6 +30,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
+
+/**
+ * Controller that exposes functionality for product prices
+ * @author Anderson Casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 @Slf4j
 @RestController
 @RequestMapping("/v1/prices")
