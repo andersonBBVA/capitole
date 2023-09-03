@@ -3,6 +3,9 @@ package com.capitole.electroniccommerce.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRICES;
+import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_SUMMARY;
+import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -16,7 +19,6 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import org.springframework.web.server.ResponseStatusException;
 
 import com.capitole.electroniccommerce.dto.PriceResponseDTO;
-import com.capitole.electroniccommerce.entity.PriceEntity;
 import com.capitole.electroniccommerce.payload.MessageResponse;
 import com.capitole.electroniccommerce.service.PriceService;
 
@@ -39,15 +41,15 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
-@RequestMapping("/v1/prices")
+@RequestMapping(CONTROLLER_PRICES)
 @Tag(name = "Prices", description = "API for Prices")
 public class PriceController {
 	
 	@Autowired
     private PriceService priceService;
 
-	@Operation(summary="Finds the price for a product id, brand id and  date.", 
-			description="Finds the price for a product id, brand id and  date., returning a list.")
+	@Operation(summary=NOTE_API_OPERATION_GET_SUMMARY, 
+			description=NOTE_API_OPERATION_GET_DESC)
     @ApiResponses(value= {
     		@ApiResponse(responseCode = "200", 
 				description = "Successful Operation",
