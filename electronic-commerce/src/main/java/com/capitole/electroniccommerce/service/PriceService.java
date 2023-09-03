@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.capitole.electroniccommerce.dto.PriceResponseDTO;
-import com.capitole.electroniccommerce.entity.PriceEntity;
 
 /**
  * Service of prices

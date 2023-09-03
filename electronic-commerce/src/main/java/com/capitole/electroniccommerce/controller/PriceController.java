@@ -2,14 +2,20 @@ package com.capitole.electroniccommerce.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRICES;
 import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_SUMMARY;
 import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC;
+import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRICES_GET;
+
+import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +25,8 @@ import org.springframework.web.client.HttpServerErrorException.InternalServerErr
 import org.springframework.web.server.ResponseStatusException;
 
 import com.capitole.electroniccommerce.dto.PriceResponseDTO;
+import com.capitole.electroniccommerce.exception.BadRequestException;
+import com.capitole.electroniccommerce.exception.ResourceNotFoundException;
 import com.capitole.electroniccommerce.payload.MessageResponse;
 import com.capitole.electroniccommerce.service.PriceService;
 
@@ -30,6 +38,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -60,12 +69,13 @@ public class PriceController {
     			content = @Content(schema = @Schema(implementation=String.class),
     			examples = @ExampleObject(
     				value="400 BAD_REQUEST All application parameters are required"))),
-    		@ApiResponse(responseCode = "401", description = "Authentication Failure",
+    		@ApiResponse(responseCode = "401", 
+    			description = "Authentication Failure",
       			content = @Content(schema = @Schema(hidden = true))),
     		@ApiResponse(responseCode = "404", 
 				description = "Price not found", 
 				content= {@Content(mediaType = "application/json",
-				schema = @Schema(implementation = String.class),
+				schema = @Schema(implementation = ApiResponse.class),
 				examples = @ExampleObject(
 					value = "404 NOT_FOUND Price was not found"))}),
     		@ApiResponse(responseCode = "500", 
@@ -74,19 +84,21 @@ public class PriceController {
     			examples = @ExampleObject(
     				value = "500 INTERNAL_SERVER_ERROR Something went wrong")))
     })
-	@GetMapping(value="/find", produces="application/json")
+	@GetMapping(value=CONTROLLER_PRICES_GET, produces="application/json")
 	public ResponseEntity<MessageResponse> getPrice(
-	        @RequestParam @Parameter(description = "Product Id", example = "35455") Integer productId,
-	        @RequestParam @Parameter(description = "Brand Id", example = "1") Integer brandId,
-	        @RequestParam @Parameter(description = "Date with format yyyy-MM-dd HH:mm:ss", example = "2020-06-14 00:00:00") 
-	        						@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date
+	        @RequestParam @Parameter(  description = "Product Id", example = "35455") @NotNull Integer productId,
+	        @RequestParam @Parameter(description = "Brand Id", example = "1") @NotNull Integer brandId,
+	        @RequestParam @Parameter(description = "Date with format yyyy-MM-dd HH:mm:ss", example = "2020-06-14 00:00:00")  
+	        	@NotNull @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date
 	    ) {
+		String uuid = UUID.randomUUID().toString();
     	try {
+    		log.info("UUID generated for the query: %s ", uuid );
     		List<PriceResponseDTO> priceResponseDTO = priceService.findPriceListByProduct(productId, brandId, date);
     		log.info(priceResponseDTO.toString());
     		
     		if (priceResponseDTO == null || priceResponseDTO.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Price was not found");
+                throw new ResourceNotFoundException("Price was not found",uuid,CONTROLLER_PRICES_GET);
             }
     		
     		log.info("Returning list...");
@@ -97,10 +109,9 @@ public class PriceController {
                             .build()
                     , HttpStatus.OK);
             
-		} catch (InternalServerError e) {
-			log.error(e.getLocalizedMessage());
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went wrong");
-		}
+    	}catch (BadRequestException badRequestEx ) {
+            throw  new BadRequestException(badRequestEx.getMessage());
+        } 
 	}
 
 }

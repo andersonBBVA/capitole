@@ -13,6 +13,8 @@ public class APIConsts {
 	 */
 
 	public static final String CONTROLLER_PRICES = "/v1/prices";
+	public static final String CONTROLLER_PRICES_GET = "/find";
+	
 	
 	/**
 	 * Method description
