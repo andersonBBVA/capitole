@@ -91,7 +91,8 @@ public class PriceController {
 		String uuid = UUID.randomUUID().toString();
     	try {
     		log.info("UUID generated for the query: %s ", uuid );
-    		List<PriceResponseDTO> priceResponseDTO = priceService.findPriceListByProduct(productId, brandId, date);
+    		log.info("Enter the findPriceListByProductAndDate method of the class PriceController." );
+    		List<PriceResponseDTO> priceResponseDTO = priceService.findPriceListByProductAndDate(productId, brandId, date);
     		log.info(priceResponseDTO.toString());
     		
     		if (priceResponseDTO == null || priceResponseDTO.isEmpty()) {

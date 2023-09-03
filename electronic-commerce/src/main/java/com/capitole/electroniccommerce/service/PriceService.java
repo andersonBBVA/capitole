@@ -20,5 +20,5 @@ public interface PriceService {
 	 * @param date;Date for which you want to search the price return prices filtered by date
 	 * @return
 	 */
-	public List<PriceResponseDTO> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date);
+	public List<PriceResponseDTO> findPriceListByProductAndDate(Integer productId, Integer brandId, LocalDateTime date);
 }

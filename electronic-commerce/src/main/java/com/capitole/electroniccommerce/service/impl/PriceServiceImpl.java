@@ -27,7 +27,7 @@ public class PriceServiceImpl implements PriceService {
 	PriceDAO priceDAO;
 	
 	@Override
-	public List<PriceResponseDTO> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date) {
+	public List<PriceResponseDTO> findPriceListByProductAndDate(Integer productId, Integer brandId, LocalDateTime date) {
 		log.info("Checking prices...");
 		
 		List<PriceEntity> listPriceEntity  = priceDAO.findPrice(productId, brandId, date);
