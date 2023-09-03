@@ -1,19 +1,18 @@
-# capitole
+# API FIND PRICE
 
-## Acceso sin docker por el puerto 8080
+## Access via port 8080
 
 ### URL SWAGGER 
 ```
  http://localhost:8080/swagger-ui/index.html
- ```
+```
 
 ### Acceso DB H2
-
 ```
-http://localhost:8080/h2-console/
+ http://localhost:8080/h2-console/
 ```
 
-### Credenciales
+### Credentials
 
 JDBC URL: ``` jdbc:h2:mem:commercedb ```
 
@@ -33,15 +32,4 @@ docker build -t "capitole_technical_test_pricing_api" .
 docker-compose up -d
 ```
 
-#### Se ejecuta en el puerto ``` 9090 ```
-
-### URL SWAGGER 
-```
- http://localhost:9090/swagger-ui/index.html
- ```
-
-### Acceso DB H2
-
-```
-http://localhost:9090/h2-console/
-```
+#### With docker runs on port ``` 9090 ```
