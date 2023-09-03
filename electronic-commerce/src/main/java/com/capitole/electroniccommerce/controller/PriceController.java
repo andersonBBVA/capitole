@@ -80,28 +80,18 @@ public class PriceController {
 	        						@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date
 	    ) {
     	try {
-    		List<PriceEntity> listPriceEntity = priceService.findPriceListByProduct(productId, brandId, date);
-    		log.info(listPriceEntity.toString());
+    		List<PriceResponseDTO> priceResponseDTO = priceService.findPriceListByProduct(productId, brandId, date);
+    		log.info(priceResponseDTO.toString());
     		
-    		if (listPriceEntity == null || listPriceEntity.isEmpty()) {
+    		if (priceResponseDTO == null || priceResponseDTO.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Price was not found");
             }
-    		
-    		List<PriceResponseDTO> priceResponseDTOList = listPriceEntity.stream()
-    			    .map(entity -> PriceResponseDTO.builder()
-    			    	.productId(entity.getProductId())
-    			    	.brandId(entity.getBrandEntity().getBrandId())
-    			    	.price(entity.getPrice())
-    			    	.startDate(entity.getStartDate())
-    			    	.endDate(entity.getEndDate())
-    			        .build())
-    			    .toList();
     		
     		log.info("Returning list...");
             return new ResponseEntity<>(
             		MessageResponse.builder()
                             .message("Successful Operation")
-                            .object( priceResponseDTOList)
+                            .object( priceResponseDTO)
                             .build()
                     , HttpStatus.OK);
             

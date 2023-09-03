@@ -3,6 +3,7 @@ package com.capitole.electroniccommerce.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.capitole.electroniccommerce.dto.PriceResponseDTO;
 import com.capitole.electroniccommerce.entity.PriceEntity;
 
 /**
@@ -20,5 +21,5 @@ public interface PriceService {
 	 * @param date;Date for which you want to search the price return prices filtered by date
 	 * @return
 	 */
-	public List<PriceEntity> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date);
+	public List<PriceResponseDTO> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date);
 }

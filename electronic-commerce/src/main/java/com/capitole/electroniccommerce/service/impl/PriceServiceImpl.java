@@ -4,8 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.capitole.electroniccommerce.dto.PriceResponseDTO;
 import com.capitole.electroniccommerce.entity.PriceEntity;
 import com.capitole.electroniccommerce.repository.PriceDAO;
 import com.capitole.electroniccommerce.service.PriceService;
@@ -26,9 +29,20 @@ public class PriceServiceImpl implements PriceService {
 	PriceDAO priceDAO;
 	
 	@Override
-	public List<PriceEntity> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date) {
+	public List<PriceResponseDTO> findPriceListByProduct(Integer productId, Integer brandId, LocalDateTime date) {
 		log.info("Checking prices...");
-		return priceDAO.findPrice(productId, brandId, date);
+		
+		List<PriceEntity> listPriceEntity  = priceDAO.findPrice(productId, brandId, date);
+		
+		return listPriceEntity.stream()
+			    .map(entity -> PriceResponseDTO.builder()
+			    	.productId(entity.getProductId())
+			    	.brandId(entity.getBrandEntity().getBrandId())
+			    	.price(entity.getPrice())
+			    	.startDate(entity.getStartDate())
+			    	.endDate(entity.getEndDate())
+			        .build())
+			    .toList();
 	}
 
 }
