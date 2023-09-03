@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /** 
  * Service that defines the business logic for pricing 
- * @author 01061
+ * @author Anderson Casas
  * @Data  2023/09/03
  * @Since  2023/09/03
  */
