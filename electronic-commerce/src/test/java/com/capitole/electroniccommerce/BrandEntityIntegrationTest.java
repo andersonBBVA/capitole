@@ -12,7 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-
+/**
+ * brand table integration test with DB with flyway 
+ * @author Anderson Casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 
 @SpringJUnitConfig
 @SpringBootTest
