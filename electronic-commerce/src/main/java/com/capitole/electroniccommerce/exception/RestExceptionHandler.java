@@ -43,7 +43,7 @@ public class RestExceptionHandler {
      * @return apiResponse, payload 
      */
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ApiResponse> handlerBadRequestException(MissingServletRequestParameterException ex) {
+    public ResponseEntity<ApiResponse> handlerBadRequestExceptionParameter(MissingServletRequestParameterException ex) {
     	log.warn(ex.getMessage()); 
         ApiResponse apiResponse = ApiResponse.builder()
     			.messagge(ex.getMessage())
@@ -60,7 +60,7 @@ public class RestExceptionHandler {
      * @return apiResponse, payload
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<ApiResponse> handlerBadRequestException(MethodArgumentTypeMismatchException ex) {
+    public ResponseEntity<ApiResponse> handlerBadRequestExceptionArgumentT(MethodArgumentTypeMismatchException ex) {
     	log.warn(ex.getMessage()); 
     	ApiResponse apiResponse = ApiResponse.builder()
     			.messagge(ex.getMessage())
@@ -70,5 +70,23 @@ public class RestExceptionHandler {
         
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
     }
+    
+    /**
+     * controls logic errors or catch errors  400
+     * @param ex
+     * @return apiResponse, payload
+     */
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiResponse> handlerBadRequestException(BadRequestException ex) {
+    	log.warn(ex.getMessage()); 
+    	ApiResponse apiResponse = ApiResponse.builder()
+    			.messagge(ex.getMessage())
+    			.url("")
+    			.uuid("")
+    			.build();
+        
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
+    }
+    
     
 }

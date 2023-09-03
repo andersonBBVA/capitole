@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.capitole.electroniccommerce.dto.PriceResponseDTO;
+import com.capitole.electroniccommerce.exception.ResourceNotFoundException;
 import com.capitole.electroniccommerce.payload.MessageResponse;
 
 @SpringJUnitConfig
@@ -28,7 +29,7 @@ class PriceControllerTest {
 	
 	 @Autowired
     private PriceController princeController;
-
+	 
     private PriceResponseDTO createPriceResponseDTO(Integer productId,Long brandId, BigDecimal price, LocalDateTime startDate, LocalDateTime endDate) {
         return PriceResponseDTO.builder()
                 .productId(productId)
@@ -45,8 +46,7 @@ class PriceControllerTest {
                 .object(expectedPrice)
                 .build();
     }
-
-	    
+    
     @Test
     @DisplayName("Test 1: request at 10:00 on the 14th for product 35455 for brand 1 (ZARA)")
     void test1() {    	
@@ -137,5 +137,12 @@ class PriceControllerTest {
     	assertEquals(HttpStatus.OK, price.getStatusCode());
     	assertEquals(expectedMessage, price.getBody());
     }
-
+    @Test
+    @DisplayName("Test 6: Not found request for the year 2023 at 9:00 p.m. on the 16th for product 35455 for brand 1 (ZARA)")
+    void test6() {  
+    	LocalDateTime date = LocalDateTime.parse("2023-06-16 21:00:00", DATE_TIME_FORMATTER); 
+    	assertThrows(ResourceNotFoundException.class, 
+    			()->princeController.getPrice(PRODUCT_ID, BRAND_ID, date));     
+    }
+    
 }

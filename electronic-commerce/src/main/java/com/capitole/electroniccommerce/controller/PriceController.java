@@ -90,7 +90,7 @@ public class PriceController {
 	    ) {
 		String uuid = UUID.randomUUID().toString();
     	try {
-    		log.info("UUID generated for the query: %s ", uuid );
+    		log.info("UUID generated for the query: {} ", uuid );
     		log.info("Enter the findPriceListByProductAndDate method of the class PriceController." );
     		List<PriceResponseDTO> priceResponseDTO = priceService.findPriceListByProductAndDate(productId, brandId, date);
     		log.info(priceResponseDTO.toString());
@@ -107,9 +107,10 @@ public class PriceController {
                             .build()
                     , HttpStatus.OK);
             
-    	}catch (Exception badRequestEx ) {
-            throw  new BadRequestException(badRequestEx.getMessage());
-        } 
+    	}catch (BadRequestException e) {
+    		log.error(e.getMessage());
+    		throw  new BadRequestException("Error, message not sent, uuid: " + uuid);
+		}
 	}
 
 }
