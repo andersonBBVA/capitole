@@ -11,6 +11,10 @@ public class APIConsts {
 	/**
 	 * Path controller price
 	 */
+	
+	private APIConsts () {
+		
+	}
 
 	public static final String CONTROLLER_PRICES = "/v1/prices";
 	public static final String CONTROLLER_PRICES_GET = "/find";
