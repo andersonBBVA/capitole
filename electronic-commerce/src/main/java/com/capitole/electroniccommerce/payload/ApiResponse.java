@@ -1,5 +1,6 @@
 package com.capitole.electroniccommerce.payload;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class ApiResponse {
+@SuppressWarnings("serial")
+public class ApiResponse implements Serializable {
 	
 	@Builder.Default
     private Date date = new Date();

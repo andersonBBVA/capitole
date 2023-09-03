@@ -8,6 +8,8 @@ import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRIC
 import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_SUMMARY;
 import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC;
 import static com.capitole.electroniccommerce.constant.APIConsts.CONTROLLER_PRICES_GET;
+import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC_400;
+import static com.capitole.electroniccommerce.constant.APIConsts.NOTE_API_OPERATION_GET_DESC_404;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -61,18 +63,18 @@ public class PriceController {
 				schema = @Schema(implementation = MessageResponse.class))),
     		@ApiResponse(responseCode = "400", 
     			description = "Bad request", 
-    			content = @Content(schema = @Schema(implementation=String.class),
+    			content = @Content(schema = @Schema(implementation=ApiResponse.class),
     			examples = @ExampleObject(
-    				value="400 BAD_REQUEST All application parameters are required"))),
+    				value=NOTE_API_OPERATION_GET_DESC_400))),
     		@ApiResponse(responseCode = "401", 
     			description = "Authentication Failure",
       			content = @Content(schema = @Schema(hidden = true))),
     		@ApiResponse(responseCode = "404", 
 				description = "Price not found", 
-				content= {@Content(mediaType = "application/json",
+				content= @Content(mediaType = "application/json",
 				schema = @Schema(implementation = ApiResponse.class),
 				examples = @ExampleObject(
-					value = "404 NOT_FOUND Price was not found"))}),
+					value = NOTE_API_OPERATION_GET_DESC_404))),
     		@ApiResponse(responseCode = "500", 
     			description = "Internal Server error ", 
     			content=@Content(schema = @Schema(implementation = ErrorResponse.class),
@@ -104,7 +106,7 @@ public class PriceController {
                             .build()
                     , HttpStatus.OK);
             
-    	}catch (BadRequestException badRequestEx ) {
+    	}catch (Exception badRequestEx ) {
             throw  new BadRequestException(badRequestEx.getMessage());
         } 
 	}

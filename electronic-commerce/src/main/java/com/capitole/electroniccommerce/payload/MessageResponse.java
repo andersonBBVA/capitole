@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.ToString;
 
 /**
  *  payload representing response in an http request
@@ -13,7 +12,6 @@ import lombok.ToString;
  * @Since  2023/09/03
  */
 @Data
-@ToString
 @Builder
 @SuppressWarnings("serial")
 public class MessageResponse  implements Serializable {
