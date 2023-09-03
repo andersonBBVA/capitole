@@ -45,7 +45,7 @@ public class PriceController {
     		@ApiResponse(responseCode = "200", 
 				description = "Successful Operation",
 				content = @Content(mediaType = "application/json", 
-				schema = @Schema(implementation = String.class))),
+				schema = @Schema(implementation = MessageResponse.class))),
     		@ApiResponse(responseCode = "400", 
     			description = "Bad request", 
     			content = @Content(schema = @Schema(implementation=String.class),
