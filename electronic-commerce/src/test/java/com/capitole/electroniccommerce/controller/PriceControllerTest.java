@@ -18,6 +18,12 @@ import com.capitole.electroniccommerce.dto.PriceResponseDTO;
 import com.capitole.electroniccommerce.exception.ResourceNotFoundException;
 import com.capitole.electroniccommerce.payload.MessageResponse;
 
+/**
+ * Unit Test PriceController
+ * @author Anderson Casas
+ * @Data  2023/09/03
+ * @Since  2023/09/03
+ */
 @SpringJUnitConfig
 @SpringBootTest
 @DisplayName("Tests de peticiones al endpoint REST")
