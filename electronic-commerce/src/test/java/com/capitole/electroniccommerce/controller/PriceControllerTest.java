@@ -26,7 +26,7 @@ import com.capitole.electroniccommerce.payload.MessageResponse;
  */
 @SpringJUnitConfig
 @SpringBootTest
-@DisplayName("Tests de peticiones al endpoint REST")
+@DisplayName("Testing requests to the REST endpoint")
 class PriceControllerTest {
 
 	private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
